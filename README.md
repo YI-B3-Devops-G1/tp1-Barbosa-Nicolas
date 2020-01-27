@@ -54,3 +54,32 @@ Pour linker le dossier contenant notre fichier html et le livreur nginx
 ```bash
 sudo ln -s /etc/nginx/sites-available/devops.tp1 /etc/nginx/sites-enabled/devops.tp1
 ```
+
+
+## VAGRANT
+
+1 - Télécharger Vagrant  
+```bash 
+brew install vagrant
+````
+
+2 - Initialiser Vagrant  
+```bash
+vagrant init
+```
+
+3 - Créer le fichier Vagrantfile et le remplir
+
+Ajout de la config des ports et l'appel vers le script bootstrap.sh  
+
+```bash
+  config.vm.box = "ubuntu/trusty64"
+```
+
+```bash
+config.vm.network "forwarded_port", guest: 443, host: 4443, id: "https"
+  config.vm.network "forwarded_port", guest: 80, host: 8080, id: "nginx"
+  config.vm.network "forwarded_port", guest: 22, host: 8022, id: "ssh"
+```
+4 - Ajout des requêtes d'installation des paquets nécessaires dans bootstrap.sh
+
